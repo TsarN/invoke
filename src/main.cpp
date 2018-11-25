@@ -1,5 +1,5 @@
 #include <iostream>
-#include <invokers/linux_native/PtraceInvoker_x86_64.hpp>
+#include <invokers/ptrace/PtraceInvoker_x86_64.hpp>
 #include <profiles/linux_native.hpp>
 #include <fcntl.h>
 
