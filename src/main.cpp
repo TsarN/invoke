@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
     std::string stdinFilename;
     std::string stdoutFilename;
     std::string stderrFilename;
+    std::string workdir;
     std::vector<std::string> program, env;
 
     std::string profileName = InvokerProfile::availableProfiles[0];
@@ -36,7 +37,8 @@ int main(int argc, char **argv) {
             ("memory-limit,m", po::value<long>(&memoryLimit), "Memory limit in megabytes")
             ("wall-limit,w", po::value<double>(&wallLimit), "Wall time limit in seconds")
             ("environment,E", po::value<std::vector<std::string>>(&env), "Set environment variable")
-            ("inherit-environment,r", "Inherit current environment variables");
+            ("inherit-environment,r", "Inherit current environment variables")
+            ("workdir,d", po::value<std::string>(&workdir), "Set working directory of program");
 
     po::options_description hidden;
     hidden.add_options()
@@ -104,6 +106,7 @@ int main(int argc, char **argv) {
         config.inheritEnvironment = vm.count("inherit-environment") > 0;
         config.log = vm.count("verbose") > 0;
         config.stderr_fd = -1;
+        config.workingDirectory = workdir;
 
         if (!stdinFilename.empty()) {
             config.stdin_fd = open(stdinFilename.c_str(), O_RDONLY);

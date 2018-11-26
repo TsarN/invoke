@@ -578,7 +578,12 @@ void PtraceInvoker::printResults() const {
 }
 
 bool PtraceInvoker::doChdir() {
-    if (config.workingDirectory.empty())
+    if (config.workingDirectory.empty()) {
         return true;
-    return chdir(config.workingDirectory.c_str()) == -1;
+    }
+    if (chdir(config.workingDirectory.c_str()) == -1) {
+        result.error = errno;
+        return false;
+    }
+    return true;
 }
