@@ -387,7 +387,7 @@ std::string PtraceInvoker::traceeReadString(pid_t pid, void *addr, size_t max_si
     return res;
 }
 
-const InvokerResult &PtraceInvoker::getResult() {
+const InvokerResult &PtraceInvoker::getResult() const {
     return result;
 }
 
@@ -548,7 +548,7 @@ void PtraceInvoker::buildSyscallTable() {
     }
 }
 
-void PtraceInvoker::printResults() {
+void PtraceInvoker::printResults() const {
     if (result.error != 0) {
         std::cerr << "--- Error ---" << std::endl;
         std::cerr << result.errorMessage << std::endl;

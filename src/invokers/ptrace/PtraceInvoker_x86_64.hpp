@@ -6,12 +6,12 @@
 
 class PtraceInvoker_x86_64 : public PtraceInvoker {
 protected:
-    int regSyscall() override;
-    int regSyscallResult() override;
-    int regArg0() override;
-    int regArg1() override;
-    int regArg2() override;
-    int syscallFromName(const std::string &name) override;
+    int regSyscall() const override;
+    int regSyscallResult() const override;
+    int regArg0() const override;
+    int regArg1() const override;
+    int regArg2() const override;
+    int syscallFromName(const std::string &name) const override;
 
 public:
     explicit PtraceInvoker_x86_64(const InvokerConfig &config);

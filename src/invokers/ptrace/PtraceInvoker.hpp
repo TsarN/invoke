@@ -39,18 +39,18 @@ private:
     void buildSyscallTable();
 
 protected:
-    virtual int regSyscall() = 0;
-    virtual int regSyscallResult() = 0;
-    virtual int regArg0() = 0;
-    virtual int regArg1() = 0;
-    virtual int regArg2() = 0;
-    virtual int syscallFromName(const std::string &name) = 0;
+    virtual int regSyscall() const = 0;
+    virtual int regSyscallResult() const = 0;
+    virtual int regArg0() const = 0;
+    virtual int regArg1() const = 0;
+    virtual int regArg2() const = 0;
+    virtual int syscallFromName(const std::string &name) const = 0;
 
 public:
     explicit PtraceInvoker(const InvokerConfig &config);
     void run() override;
-    void printResults() override;
-    const InvokerResult& getResult() override;
+    void printResults() const override;
+    const InvokerResult& getResult() const override;
 };
 
 
