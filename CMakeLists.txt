@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 include_directories(src)
 
+
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost REQUIRED program_options filesystem)
 
@@ -17,3 +18,9 @@ add_executable(invoke src/main.cpp src/invokers/ptrace/PtraceInvoker.cpp
         src/profiles/linux_native.cpp
         src/InvokerProfile.cpp src/Invoker.cpp src/Invoker.hpp)
 target_link_libraries(invoke ${Boost_LIBRARIES})
+
+if(MSVC)
+    target_compile_options(invoke PRIVATE /W4 /WX)
+else(MSVC)
+    target_compile_options(invoke PRIVATE -Wall -Wextra -pedantic -Werror)
+endif(MSVC)

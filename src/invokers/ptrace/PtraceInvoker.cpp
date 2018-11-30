@@ -364,7 +364,7 @@ void PtraceInvoker::setLimit(__rlimit_resource limit, rlim_t soft, rlim_t hard) 
 }
 
 std::string PtraceInvoker::traceeReadString(pid_t pid, void *addr, size_t max_size) {
-    char *ptr = (char*)addr;
+    signed char *ptr = (signed char*)addr;
     std::string res;
     if (!ptr) {
         return res;
@@ -375,9 +375,9 @@ std::string PtraceInvoker::traceeReadString(pid_t pid, void *addr, size_t max_si
             break;
         }
         ptr += sizeof(long);
-        char *c = (char*)&word;
-        for (int n = 0; n < sizeof(word); ++c, ++n) {
-            if (*c >= 32 && *c <= 127) {
+        signed char *c = (signed char*)&word;
+        for (size_t n = 0; n < sizeof(word); ++c, ++n) {
+            if (*c >= 32) {
                 res.push_back(*c);
             } else {
                 return res;
