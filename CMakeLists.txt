@@ -16,6 +16,7 @@ add_executable(invoke src/main.cpp src/invokers/ptrace/PtraceInvoker.cpp
         src/invokers/ptrace/PtraceInvoker_x86_64.cpp src/invokers/ptrace/PtraceInvoker_x86_64.hpp
         src/tables/linux_x86_64.cpp src/tables/linux_i386.cpp
         src/profiles/linux_native.cpp
+        src/profiles/linux_nosecurity.cpp
         src/InvokerProfile.cpp src/Invoker.cpp src/Invoker.hpp)
 target_link_libraries(invoke ${Boost_LIBRARIES})
 

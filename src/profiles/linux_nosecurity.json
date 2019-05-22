@@ -1,0 +1,8 @@
+{
+    "syscalls": {
+        "default": "Allow"
+    },
+    "paths": {
+        "default": "ReadWrite"
+    }
+}

@@ -3,7 +3,7 @@
 
 import json
 
-profiles = ["linux_native"]
+profiles = ["linux_native", "linux_nosecurity"]
 
 
 def gen(name):
@@ -18,7 +18,7 @@ def gen(name):
 
     for t in data.get("syscalls", []):
         if t == "default":
-            paths_default = data["syscalls"][t]
+            syscalls_default = data["syscalls"][t]
             continue
         action = "SyscallAction::{}".format(t)
         for syscall in data["syscalls"][t]:
