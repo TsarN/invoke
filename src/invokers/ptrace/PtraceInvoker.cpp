@@ -550,31 +550,32 @@ void PtraceInvoker::buildSyscallTable() {
 
 void PtraceInvoker::printResults() const {
     if (result.error != 0) {
-        std::cerr << "--- Error ---" << std::endl;
-        std::cerr << result.errorMessage << std::endl;
+        std::cerr << "error: '" << std::endl;
+        std::cerr << result.errorMessage << "'" << std::endl;
     }
-    std::cerr << "--- Result ---" << std::endl;
-    std::cerr << "Exit code: " << result.exitCode << std::endl;
-    std::cerr << "Wall clock: " << result.wallClock << " sec" << std::endl;
-    std::cerr << "Cpu usage: " << result.cpuUsage << " sec" << std::endl;
-    std::cerr << "Memory usage: " << result.memoryUsage << " bytes" << std::endl;
+    std::cerr << "exit_code: " << result.exitCode << std::endl;
+    std::cerr << "wall_clock: " << result.wallClock << std::endl;
+    std::cerr << "cpu_clock: " << result.cpuUsage << std::endl;
+    std::cerr << "memory_usage: " << result.memoryUsage << std::endl;
 
-    std::cerr << "--- Verdicts ---" << std::endl;
+    std::cerr << "verdicts: [";
     if (result.timeLimitExceeded) {
-        std::cerr << "Time Limit Exceeded" << std::endl;
+        std::cerr << "TL,";
     }
 
     if (result.memoryLimitExceeded) {
-        std::cerr << "Memory Limit Exceeded" << std::endl;
+        std::cerr << "ML,";
     }
 
     if (result.wallLimitExceeded) {
-        std::cerr << "Wall Clock Limit Exceeded" << std::endl;
+        std::cerr << "RL,";
     }
 
     if (result.securityViolation) {
-        std::cerr << "Security Violation" << std::endl;
+        std::cerr << "SV,";
     }
+
+    std::cerr << "]" << std::endl;
 }
 
 bool PtraceInvoker::doChdir() {
